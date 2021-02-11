@@ -1,4 +1,4 @@
-/home/hardeep/IdeaProjects/notes/src/main/java/com/hardeepprojects/notes/rest/NotesRestApp.java
+/home/hardeep/IdeaProjects/notes/src/main/java/com/hardeepprojects/notes/exceptions/NoteNotFoundException.java
 /home/hardeep/IdeaProjects/notes/src/main/java/com/hardeepprojects/notes/model/Note.java
 /home/hardeep/IdeaProjects/notes/src/main/java/com/hardeepprojects/notes/app/NotesApplication.java
 /home/hardeep/IdeaProjects/notes/src/main/java/com/hardeepprojects/notes/model/NotesRepoImpl.java

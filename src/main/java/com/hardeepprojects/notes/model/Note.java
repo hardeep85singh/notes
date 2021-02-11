@@ -1,5 +1,6 @@
 package com.hardeepprojects.notes.model;
 
+import javax.ws.rs.FormParam;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -7,33 +8,27 @@ import java.util.Objects;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "movie", propOrder = {"id", "title", "description"})
+@XmlType(name = "notes", propOrder = {"id", "title", "description"})
 
 public class Note {
 
-    private String id;
-    private String title;
-    private String description;
+    @FormParam("id") private int id;
+    @FormParam("title") private String title;
+    @FormParam("description") private String description;
 
     public Note() {
     }
 
-    public Note(String id, String title) {
-        this.id = id;
-        this.title = title;
-    }
-
-    public Note(String id, String title, String description) {
-        this.id = id;
+    public Note(String title, String description) {
         this.title = title;
         this.description = description;
     }
 
-    public String getID() {
+    public int getID() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -55,9 +50,7 @@ public class Note {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        return result;
+        return getTitle().hashCode() + getDescription().hashCode();
     }
 
     @Override
@@ -79,7 +72,7 @@ public class Note {
 
     @Override
     public String toString() {
-        return String.format("%s%s%n%s%s%n%s%s%n", "ID: ", getID(), "Title: ", getTitle(),
+        return String.format("%s%d%n%s%s%n%s%s%n", "ID: ", getID(), "Title: ", getTitle(),
                 "Description: ", getDescription());
     }
 
