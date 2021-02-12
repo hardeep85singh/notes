@@ -28,7 +28,7 @@ public class Note {
         return id;
     }
 
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 

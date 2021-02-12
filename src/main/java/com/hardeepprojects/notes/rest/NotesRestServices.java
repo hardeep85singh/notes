@@ -19,12 +19,12 @@ public class NotesRestServices {
     @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Note> createNote(Note note) { // return String "note created"
+    public Response createNote(Note note) {
         System.out.println("Creating note");
-        note.setId(note.hashCode());
-        inventory.put(note.hashCode(), note);
-//        return inventory.toString();
-        return new ArrayList<>(inventory.values());
+        note.setID(note.hashCode());
+        inventory.put(note.getID(), note);
+        return Response.status(Response.Status.OK)
+                .entity("Note Created").build();
     }
 
     @GET
@@ -45,14 +45,14 @@ public class NotesRestServices {
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateNote(Note note) {
+    public Response updateNote(@QueryParam("id") String id, Note note) {
         System.out.println("Updating note");
-
-        if (inventory.get(note.getID()) == null) {
+        int parseId = Integer.parseInt(id);
+        if (!inventory.containsKey(parseId)) {
             return Response.status(Response.Status.NOT_MODIFIED)
                     .entity("Note is not in the database.\nUnable to update").build();
         } else {
-            inventory.put(note.hashCode(), note);
+            inventory.replace(parseId, note);
             return Response.status(Response.Status.OK).entity("Note Updated").build();
         }
     }
